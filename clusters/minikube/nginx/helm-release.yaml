@@ -1,0 +1,19 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: nginx
+  namespace: nginx  # Adjust as needed
+spec:
+  interval: 1m
+  chart:
+    spec:
+      chart: nginx
+      version: "15.7.2"  # Ensure you use a valid version
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: flux-system
+  values:
+    service:
+      type: ClusterIP
+
