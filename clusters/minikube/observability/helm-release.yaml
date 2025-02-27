@@ -1,0 +1,21 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: prometheus
+  namespace: observability
+spec:
+  releaseName: prometheus
+  chart:
+    spec:
+      chart: prometheus
+      version: "15.0.0"  # Adjust version as needed
+      sourceRef:
+        kind: HelmRepository
+        name: prometheus-community
+  interval: 5m
+  values:
+    server:
+      service:
+        type: NodePort
+        nodePort: 31103
+
